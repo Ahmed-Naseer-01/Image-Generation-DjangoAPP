@@ -39,3 +39,8 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+    # @property
+    # def avatar_url(self):
+    #     if self.avatar:
+    #         return self.avatar.url
+    #     return None

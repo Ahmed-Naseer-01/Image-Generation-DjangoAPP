@@ -24,7 +24,7 @@ class GenerateImageView(APIView):
             headers = {"Authorization": "Bearer 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"}
  
             payload = {
-                "inputs": prompt,
+                "inputs": prompt + "textile design",
             }
             response = requests.post(API_URL, headers=headers, json=payload)
 
@@ -47,9 +47,16 @@ class GeneratedImageView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        images = GeneratedImage.objects.all()
-        serializer = GeneratedImageSerializer(images, many=True)
+        print(request)
+        image = GeneratedImage.objects.all()
+        # image = GeneratedImage.objects.get(pk=pk)
+        serializer = GeneratedImageSerializer(image, many=True )
         return Response(serializer.data)
+
+    # def get(self, request):
+    #     images = GeneratedImage.objects.all()
+    #     serializer = GeneratedImageSerializer(images, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request):
         serializer = GeneratedImageSerializer(data=request.data)
